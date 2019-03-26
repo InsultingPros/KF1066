@@ -3,7 +3,7 @@ Incoming patch (I hope xD)
 
 # DOSH RELATED INFORMATION
 ## General information
-Since KF limits only maximum amount of dosh that can throwed
+If we look inside main function that is responsible for dosh throwing we will see:
 
 **KFPawn.uc** -> **exec function TossCash(int Amount)**
 ```unrealscript
@@ -14,6 +14,11 @@ if( Amount<=0 )
         return;
     Amount = Min(Amount,int(Controller.PlayerReplicationInfo.Score));
 ```
-Controller.PlayerReplicationInfo.Score(limited to )
-throw If you throw huge amount of dosh (per 1
+From where:
+```unrealscript
+Amount = Min(Amount,int(Controller.PlayerReplicationInfo.Score));
+```
+So it's only limited from top. And it lets you to throw a single CashPickup with value of 1 dosh (or 2, 3, etc). And there is no limitation in toss duration. It means you throw several hundreds and thousands of CashPickup's in a very very small time (less than 0.05-0.01s). And this is the root of evil.
+## Bypassing collisions
+If you use macro, which is easily made in a few clicks and which throws several hundreds of CashPickup
 DOSH collision bypass: не работает с BSP геометрией и так же со встроенной коллижн моделью меша
