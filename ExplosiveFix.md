@@ -40,4 +40,7 @@ function bool NoFF( Pawn injured, float FF )
 }
 ```
 But this is a half solution, since it blocks fire on levels and breaks TestMaps, some story maps (like RE-Mansion where there is a husk projectile emitter at some part, and it deals 0....).
-2. Since you have to edit **KFPawn** for dosh exploits, please add fixes from Poosh's [ScrnHumanPawn](https://github.com/poosh/KF-ScrnBalance/blob/fac4421d42022fafb6247ac6b78d5acbbfe79029/Classes/ScrnHumanPawn.uc#L1951). It has all the needed comments so I won't post them here.
+
+2. Since you have to edit **KFPawn** for dosh exploits, please add fixes from Poosh's [ScrnHumanPawn](https://github.com/poosh/KF-ScrnBalance/blob/fac4421d42022fafb6247ac6b78d5acbbfe79029/Classes/ScrnHumanPawn.uc#L1951). It has all the needed comments and code are there.
+
+3.
