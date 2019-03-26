@@ -3,7 +3,7 @@ Incoming patch (I hope xD)
 
 # DOSH RELATED INFORMATION
 ## General information
-If we look inside main function that is responsible for dosh throwing we will see:
+Let's look inside function that is responsible for dosh throwing
 
 **KFPawn.uc**
 
