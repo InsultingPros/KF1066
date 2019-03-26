@@ -88,13 +88,15 @@ var transient byte LongTossCashCount;
 exec function TossCash( int Amount )
 {
   // To fix cash tossing exploit.
-  if( CashTossTimer<Level.TimeSeconds && (LongTossCashTimer<Level.TimeSeconds || LongTossCashCount<20) ) [20 is way too punishing, 60-100 is kinda ok. But if you want to keep it as low ->]
+  if( CashTossTimer<Level.TimeSeconds && (LongTossCashTimer<Level.TimeSeconds || LongTossCashCount<20) )
+  // 20 is way too punishing, 60-100 is kinda ok. But if you want to keep it as low ->
   {
     // CashPickup spawning and etc, your main code here
     CashTossTimer = Level.TimeSeconds+0.1f;
     if( LongTossCashTimer<Level.TimeSeconds )
     {
-      LongTossCashTimer = Level.TimeSeconds+5.f; [-> then at least decrease this too]
+      // -> then at least decrease this too
+      LongTossCashTimer = Level.TimeSeconds+5.f; 
       LongTossCashCount = 0;
     }
     else ++LongTossCashCount;
