@@ -5,16 +5,19 @@ Incoming patch (I hope xD)
 ## General information
 Let's look inside function that is responsible for dosh throwing
 
-**KFPawn.uc**
+**\KFMod\KFPawn.uc**
 
-`line: 2964: exec function TossCash(int Amount)`
+`line 2964:`
 ```unrealscript
+exec function TossCash(int Amount)
+...
 if( Amount<=0 )
   Amount = 50;
 Controller.PlayerReplicationInfo.Score = int(Controller.PlayerReplicationInfo.Score); // To fix issue with throwing 0 pounds.
 if( Controller.PlayerReplicationInfo.Score<=0 || Amount<=0 )
   return;
 Amount = Min(Amount,int(Controller.PlayerReplicationInfo.Score));
+...
 ```
 From where:
 ```unrealscript
