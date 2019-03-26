@@ -7,7 +7,7 @@ Pipes have another issue. Much more deadly than the first one, at least to zeds.
 Aaaand besides that when multiple pipe bombs explode or you detonate one with methods described above - you will get huge log spam about out of bound sound array.
 
 ## Possible Fixes
-1. Mutant's [Explosive Fix Mut](https://forums.tripwireinteractive.com/forum/killing-floor/killing-floor-modifications/general-modding-discussion-aa/106460-explosives-fix-mutator). I even made a [hiteListed version](https://forums.tripwireinteractive.com/forum/killing-floor/killing-floor-modifications/general-modding-discussion-aa/106460-explosives-fix-mutator?p=2329339#post2329339). Basically spawns a GameRule which does:
+1. Mutant's [Explosive Fix Mut](https://forums.tripwireinteractive.com/forum/killing-floor/killing-floor-modifications/general-modding-discussion-aa/106460-explosives-fix-mutator). I even made a [WhiteListed version](https://forums.tripwireinteractive.com/forum/killing-floor/killing-floor-modifications/general-modding-discussion-aa/106460-explosives-fix-mutator?p=2329339#post2329339). Basically spawns a GameRule which does:
 ```unrealscript
 function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn instigatedBy, vector HitLocation, out vector Momentum, class<DamageType> DamageType )
 {
@@ -49,6 +49,6 @@ But this is a half solution, since it blocks fire on levels and breaks TestMaps,
 
 3. For **PipeBombs** lets look again at [ScrnPipeBombProjectile](https://github.com/poosh/KF-ScrnBalance/blob/master/Classes/ScrnPipeBombProjectile.uc). 
 
-- `//default.ExplodeSounds[0] = sound(DynamicLoadObject(default.ExplodeSoundRefs[0], class'Sound', true));` is moved from `PreloadAssets()` to `defaultproperties` block. Fixes log spam.
+- `default.ExplodeSounds[0] = sound(DynamicLoadObject(default.ExplodeSoundRefs[0], class'Sound', true));` is moved from `PreloadAssets()` to `defaultproperties` block. And removed `default.ExplodeSounds[0] = none;` from `UnloadAssets`. Fixes log spam.
 - Added a `bTriggered` bool to prevent `TakeDamage(...)` to trigger more than once. Fixes super damage.
 - Added a check to return all damage that is NOT from zeds. Fixes pipe detonation with spectator projectiles / nades.
