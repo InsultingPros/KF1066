@@ -6,7 +6,8 @@ Incoming patch (I hope xD)
 If we look inside main function that is responsible for dosh throwing we will see:
 
 **KFPawn.uc**
-`**line: 2964** -> **exec function TossCash(int Amount)**`
+
+`line: 2964: exec function TossCash(int Amount)`
 ```unrealscript
 if( Amount<=0 )
   Amount = 50;
