@@ -46,4 +46,8 @@ If you have fast enough macro or there are several fags who spam dosh with savag
 ### Possible Fixe for these exploits
 #### Hard way
 Dig into engine and fix collsion calculating issues. I can get that this is a very time consuming and lot's of testing required solution (and still won't fix crashes / lags). So.
-#### _Lazy_ way.
+#### Lazy way.
+**Limit** the CashPickups that a single **KFPawn** can throw. This can be:
+- don't let pawns to throw less than 50 dosh CashPickup. So you won't be able to do shit with that few money / 50 -CashPickup's. BUT there are lot's of servers with custom respawn dosh amount, or lot's of zeds to kill, raised bounty for them, so they still will be able to abuse.
+- So better leave cash amount as is, but limit the CashPickup amount that a single pawn can throw. And you will be able to draw flowers with dosh while not being able to do other harmfull stuff.
+[Imgur](https://i.imgur.com/ITaG6xL.jpg)
