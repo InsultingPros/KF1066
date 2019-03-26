@@ -52,3 +52,5 @@ But this is a half solution, since it blocks fire on levels and breaks TestMaps,
 - `default.ExplodeSounds[0] = sound(DynamicLoadObject(default.ExplodeSoundRefs[0], class'Sound', true));` is moved from `PreloadAssets()` to `defaultproperties` block. And removed `default.ExplodeSounds[0] = none;` from `UnloadAssets`. Fixes log spam.
 - Added a `bTriggered` bool to prevent `TakeDamage(...)` to trigger more than once. Fixes super damage.
 - Added a check to return all damage that is NOT from zeds. Fixes pipe detonation with spectator projectiles / nades.
+
+P.S. Poosh is not against to use his code, and besides that I asked him to make those fixes xD
