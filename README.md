@@ -12,7 +12,7 @@ if( Amount<=0 )
 Controller.PlayerReplicationInfo.Score = int(Controller.PlayerReplicationInfo.Score); // To fix issue with throwing 0 pounds.
 if( Controller.PlayerReplicationInfo.Score<=0 || Amount<=0 )
   return;
-Amount = Min(Amount,int(Controller.PlayerReplicationInfo.Score));
+_Amount = Min(Amount,int(Controller.PlayerReplicationInfo.Score));_
 ```
 From where:
 ```unrealscript
