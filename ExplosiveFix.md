@@ -47,5 +47,8 @@ But this is a half solution, since it blocks fire on levels and breaks TestMaps,
 
 2. Since you have to edit **KFPawn** for dosh exploits, please add fixes from Poosh's [ScrnHumanPawn](https://github.com/poosh/KF-ScrnBalance/blob/fac4421d42022fafb6247ac6b78d5acbbfe79029/Classes/ScrnHumanPawn.uc#L1951). It has all the needed comments and code are there.
 
-3. For **PipeBombs** lets look again at [ScrnPipeBombProjectile](https://github.com/poosh/KF-ScrnBalance/blob/master/Classes/ScrnPipeBombProjectile.uc). `//default.ExplodeSounds[0] = sound(DynamicLoadObject(default.ExplodeSoundRefs[0], class'Sound', true));` is moved from `PreloadAssets()` to `defaultproperties` block. And added a `bTriggered` bool to prevent `TakeDamage(...)` to trigger more than once.
-to
+3. For **PipeBombs** lets look again at [ScrnPipeBombProjectile](https://github.com/poosh/KF-ScrnBalance/blob/master/Classes/ScrnPipeBombProjectile.uc). 
+
+- `//default.ExplodeSounds[0] = sound(DynamicLoadObject(default.ExplodeSoundRefs[0], class'Sound', true));` is moved from `PreloadAssets()` to `defaultproperties` block. Fixes log spam.
+- Added a `bTriggered` bool to prevent `TakeDamage(...)` to trigger more than once. Fixes super damage.
+- Added a check to return all damage that is NOT from zeds. Fixes pipe detonation with spectator projectiles / nades.
