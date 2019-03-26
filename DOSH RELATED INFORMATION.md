@@ -104,4 +104,4 @@ exec function TossCash( int Amount )
   }
 }
 ```
-
+In result even full 6 player team won't be able to spawn enough CashPickups to even lag the server, not talking about other exploits.
