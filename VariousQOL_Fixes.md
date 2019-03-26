@@ -1,0 +1,2 @@
+# Genaral Information
+## Part A
