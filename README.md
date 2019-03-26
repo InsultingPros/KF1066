@@ -45,3 +45,5 @@ If you have fast enough macro or there are several fags who spam dosh with savag
 
 ### Possible Fixe for these exploits
 #### Hard way
+Dig into engine and fix collsion calculating issues. I can get that this is a very time consuming and lot's of testing required solution (and still won't fix crashes / lags). So.
+#### _Lazy_ way.
