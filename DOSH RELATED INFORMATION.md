@@ -1,8 +1,4 @@
-# KF1066
-Incoming patch (I hope xD)
-
-# DOSH RELATED INFORMATION
-## General information
+# General information
 Let's look inside function that is responsible for dosh throwing
 
 **\KFMod\KFPawn.uc**
@@ -23,11 +19,12 @@ From where:
 ```unrealscript
 Amount = Min(Amount,int(Controller.PlayerReplicationInfo.Score));
 ```
-So it's only limited from top. And it lets you to throw a single CashPickup with value of 1 dosh (or 2, 3, etc). And there is no limitation in toss duration. It means you throw several hundreds and thousands of CashPickup's in a very very small time (less than 0.05-0.01s). And this is the root of evil.
-### Lags
+So it's only limited from top. And it lets you to throw a single CashPickup with value of 1 dosh (or 2, 3, etc). And there is no limitation in toss duration. It means you throw several hundreds and thousands of CashPickup's in a few milisecond during all games you join (since you always get in average 3-8k dosh). And this is the root of evil.
+
+## Lags
 Obviously several hundreds of CashPickup's lag clients PC's, and if spam continues more and more server will start to overload too. Even to the limits when the gameplay freeze for several seconds. More server hardware power - a bit shorter freeze will be, and pickup limit that triggers it will also raise. But still nothing can prevent it or overplay.
 
-### Bypassing collisions
+## Bypassing collisions
 **ECEPTIONS!** - BSP Geometry, built in Collision of Mesh.
 
 If you use macro, which is easily made in a few clicks and which throws several hundreds of CashPickup's in a short time at *Blocking Volume*, *Meshes*, everything else that has *Pawn* blocking feature **->** engine will fail to calcualte all these amounts of picups and collisions, and you will be able to pass through. This means you can easily:
@@ -37,16 +34,16 @@ If you use macro, which is easily made in a few clicks and which throws several 
 - go through closed, welded doors. Need to run or troll a teammate? No problem!
 This has lot's of usecases, limited only to maps layout.
 
-### Killing Zeds
+## Killing Zeds
 You can do it with while bumping a zed, starting CashPickup spam and finally moving forward to it. Or bumb it, look down, spam CashPickups, and jump down to crush zed with your own collision.
 - you see a FP rushing at your direction? No problems, hug it and press macro. Now he's gone.
 - you see a lonely pat? Make his life super short with your macro!
 But even this is not the main problem.
 
-### Crashing Servers
+## Crashing Servers
 If you have fast enough macro or there are several fags who spam dosh with savage speed, server will die. And lucky you if it has autorestart script, otherwise its just gone.
 
-### Possible Fixe for these exploits
+# Possible Fixes for these exploits
 #### Hard way
 Dig into engine and fix collsion calculating issues. I can get that this is a very time consuming and lot's of testing required solution (and still won't fix crashes / lags). So.
 #### Lazy way.
