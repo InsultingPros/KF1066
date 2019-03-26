@@ -19,10 +19,10 @@ From where:
 ```unrealscript
 Amount = Min(Amount,int(Controller.PlayerReplicationInfo.Score));
 ```
-So it's only limited from top. And it lets you to throw a single CashPickup with value of 1 dosh (or 2, 3, etc). And there is no limitation in toss duration. It means you throw several hundreds and thousands of CashPickup's in a few milisecond during all games you join (since you always get in average 3-8k dosh). And this is the root of evil.
+So it's only limited from top. And it lets you to throw a single CashPickup with value of 1 dosh (or 2, 3, etc). And there is no limitation in toss duration. It means you are able to throw several hundreds and thousands of CashPickup's in a few milliseconds during all games you join (since you always get in average 3-8k dosh). And this is the root of evil.
 
 ## Lags
-Obviously several hundreds of CashPickup's lag clients PC's, and if spam continues more and more server will start to overload too. Even to the limits when the gameplay freeze for several seconds. More server hardware power - a bit shorter freeze will be, and pickup limit that triggers it will also raise. But still nothing can prevent it or overplay.
+Obviously even several hundreds of CashPickup's lag clients PC's, and if spam continues more and more server will start to overload too. Even to the limits when the gameplay freeze for several seconds. More server hardware power - a bit shorter freeze will be, and pickup limit that triggers it will also raise. But still nothing can prevent it.
 
 ## Bypassing collisions
 **ECEPTIONS!** - BSP Geometry, built in Collision of Mesh.
@@ -49,7 +49,7 @@ Dig into engine and fix collsion calculating issues. I can get that this is a ve
 #### Lazy way.
 **Limit** the CashPickups that a single **KFPawn** can throw. This can be:
 - don't let pawns to throw less than 50 dosh CashPickup. So you won't be able to do shit with that few money / 50 -CashPickup's. BUT there are lot's of servers with custom respawn dosh amount, or lot's of zeds to kill, raised bounty for them, so they still will be able to abuse.
-- So better leave cash amount as is, but limit the CashPickup amount that a single pawn can throw. And you will be able to draw flowers with dosh while not being able to do other harmfull stuff.
+- So better limit the CashPickup amount that a single pawn can throw. And you will be able to draw flowers with dosh while not being able to do other harmfull stuff.
 ![Imgur](https://i.imgur.com/ITaG6xL.jpg)
 Marco's [ServerPerks](https://forums.tripwireinteractive.com/forum/killing-floor/killing-floor-modifications/coding-aa/36898-mut-per-server-stats) has a very smart solution. It's [Source files](http://www.klankaos.com/downloads/ServerPerksSrc.rar).
 
@@ -78,3 +78,27 @@ exec function TossCash( int Amount )
   }
 }
 ```
+
+So you can just do similar timing check in your **KFPawn**.
+`line 194:`
+```unrealscript
+var transient float CashTossTimer,LongTossCashTimer;
+var transient byte LongTossCashCount;
+
+exec function TossCash( int Amount )
+{
+  // To fix cash tossing exploit.
+  if( CashTossTimer<Level.TimeSeconds && (LongTossCashTimer<Level.TimeSeconds || LongTossCashCount<20) ) [20 is way too punishing, 60-100 is kinda ok. But if you want to keep it as low ->]
+  {
+    // CashPickup spawning and etc, your main code here
+    CashTossTimer = Level.TimeSeconds+0.1f;
+    if( LongTossCashTimer<Level.TimeSeconds )
+    {
+      LongTossCashTimer = Level.TimeSeconds+5.f; [-> then at least decrease this too]
+      LongTossCashCount = 0;
+    }
+    else ++LongTossCashCount;
+  }
+}
+```
+
