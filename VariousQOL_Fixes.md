@@ -5,6 +5,7 @@ Here are some little thing that can be easily fixed and the won't break any mod 
 Please, JUST PLEASE, add this to `KFGameType` -> `State MatchInProgress` -> `function CloseShops()`:
 ```unrealscript
 local CrossbuzzsawBlade CrossbuzzsawBlade;
+
 foreach DynamicActors(class'CrossbuzzsawBlade', CrossbuzzsawBlade)
 {
   if(CrossbuzzsawBlade == none)
