@@ -8,11 +8,11 @@ If we look inside main function that is responsible for dosh throwing we will se
 **KFPawn.uc** -> **exec function TossCash(int Amount)**
 ```unrealscript
 if( Amount<=0 )
-        Amount = 50;
-    Controller.PlayerReplicationInfo.Score = int(Controller.PlayerReplicationInfo.Score); // To fix issue with throwing 0 pounds.
-    if( Controller.PlayerReplicationInfo.Score<=0 || Amount<=0 )
-        return;
-    Amount = Min(Amount,int(Controller.PlayerReplicationInfo.Score));
+  Amount = 50;
+Controller.PlayerReplicationInfo.Score = int(Controller.PlayerReplicationInfo.Score); // To fix issue with throwing 0 pounds.
+if( Controller.PlayerReplicationInfo.Score<=0 || Amount<=0 )
+  return;
+Amount = Min(Amount,int(Controller.PlayerReplicationInfo.Score));
 ```
 From where:
 ```unrealscript
