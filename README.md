@@ -51,3 +51,4 @@ Dig into engine and fix collsion calculating issues. I can get that this is a ve
 - don't let pawns to throw less than 50 dosh CashPickup. So you won't be able to do shit with that few money / 50 -CashPickup's. BUT there are lot's of servers with custom respawn dosh amount, or lot's of zeds to kill, raised bounty for them, so they still will be able to abuse.
 - So better leave cash amount as is, but limit the CashPickup amount that a single pawn can throw. And you will be able to draw flowers with dosh while not being able to do other harmfull stuff.
 ![Imgur](https://i.imgur.com/ITaG6xL.jpg)
+Marco's [ServerPerks](https://forums.tripwireinteractive.com/forum/killing-floor/killing-floor-modifications/coding-aa/36898-mut-per-server-stats) has a very smart solution.
