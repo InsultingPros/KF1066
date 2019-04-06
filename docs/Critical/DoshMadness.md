@@ -6,27 +6,25 @@ No restrictions for dosh tossing over a short period of time results in the foll
 2. Instantly kill *any* zeds.
 3. Lag clients, crash servers.
 
-# Detailed exploits description
+## Detailed exploits description
 
-## Exploits reasons
+### Exploits reasons
 
 `KFMod/KFPawn.uc#2964`
 
-```unrealscript
+```clike
 exec function TossCash( int Amount )
 {
+  ...
 
-    ...
+  if (Amount <= 0)
+    Amount = 50;
+  Controller.PlayerReplicationInfo.Score = int(Controller.PlayerReplicationInfo.Score); // To fix issue with throwing 0 pounds.
+  if (Controller.PlayerReplicationInfo.Score <= 0 || Amount <= 0)
+    return;
+  Amount = Min(Amount,int(Controller.PlayerReplicationInfo.Score));
 
-    if( Amount<=0 )
-        Amount = 50;
-    Controller.PlayerReplicationInfo.Score = int(Controller.PlayerReplicationInfo.Score); // To fix issue with throwing 0 pounds.
-    if( Controller.PlayerReplicationInfo.Score<=0 || Amount<=0 )
-        return;
-    Amount = Min(Amount,int(Controller.PlayerReplicationInfo.Score));
-
-    ...
-
+  ...
 }
 ```
 
@@ -40,6 +38,7 @@ Having tons of `CashPickup` actors concentrated in one spot is very calculation-
 Players can use this to bypass intended map-designers' blocks and reach the unreachable spots by going straight through static meshes, various blocking volumes, etc.
 
 However, this doesn't work with:
+
 - BSP Geometry
 - Meshes with built-in blocking collision
 
@@ -67,28 +66,28 @@ If you have 4k or more, you don't even need to look at your feet.
 
 [Video demonstration](https://youtu.be/NGwXY79Ka0c)
 
-# Proposed solution
+## Proposed solution
 
 Simply add a very small timeout after tossing.
 
 After testing this with friends, we came up with `0.1f`. It prevents any dosh-related problems with a small exception (about this later) and it's not very restrictive so you still can please your inner Michelangelo:
 
-![A truly majestic piece of art](https://i.imgur.com/ITaG6xL.jpg)
+![A truly majestic piece of art](../IMG/usuk.jpg)
 
 Proposed fix:
 
 `KFMod/KFPawn.uc`
 
-```unrealscript
+```clike
 var float AllowedTossCashTime;
 
 ...
 
-exec function TossCash( int Amount )
+exec function TossCash(int Amount)
 {
   ...
 
-  if( Level.TimeSeconds < AllowedTossCashTime )
+  if (Level.TimeSeconds < AllowedTossCashTime)
     return;
 
   ...
@@ -102,9 +101,11 @@ However, collision bypass won't be completely fixed. The bypass threshold for so
 We still consider this a nice tradeoff between pleasant tossing experience and 0.01% of the playerbase who will be able to abuse this exploit. Keeping in mind that all other nasty dosh exploits are fixed.
 
 If you want this completely fixed, you should restrict players to have no more than ~25 dosh pickups per ~8.5 seconds window. This is definitely not a very pleasant experience. You have 2 ways to achieve this:
+
 - Simply raise the tossing timeout to `0.35f`.
 - Additionally restrict tossing to 25 pickups per 8.5 seconds window.
-  ```unrealscript
+
+```clike
   var float AllowedTossCashTime, WindowEndTossCashTime;
   var byte WindowTossCashCount;
 
@@ -114,13 +115,13 @@ If you want this completely fixed, you should restrict players to have no more t
   {
     ...
 
-    if( Level.TimeSeconds < AllowedTossCashTime || (Level.TimeSeconds < WindowEndTossCashTime && WindowTossCashCount > 25) )
+    if (Level.TimeSeconds < AllowedTossCashTime || (Level.TimeSeconds < WindowEndTossCashTime && WindowTossCashCount > 25))
       return;
 
     ...
 
     AllowedTossCashTime = Level.TimeSeconds + 0.1f;
-    if( WindowEndTossCashTime < Level.TimeSeconds )
+    if (WindowEndTossCashTime < Level.TimeSeconds)
     {
       WindowEndTossCashTime = Level.TimeSeconds + 8.5f;
       WindowTossCashCount = 0;
@@ -128,5 +129,6 @@ If you want this completely fixed, you should restrict players to have no more t
     else
       ++WindowTossCashCount;
   }
-  ```
+```
+
 - Oh, and you can probably tweak something in the engine to prevent bypass exploit from happening.
