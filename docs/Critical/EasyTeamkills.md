@@ -8,7 +8,7 @@ TODO: video demonstration
 
 ## Exploit reason
 
-`KFMod/KFPawn.uc#2250`
+[KFMod/KFPawn.uc#2250](https://github.com/InsultingPros/KillingFloor/blob/6412f4322d353c05604db3851bdc4ca1d2f2ba32/KFMod/Classes/KFPawn.uc#L2250)
 
 ```clike
 function TakeDamage(int Damage, Pawn instigatedBy, Vector hitlocation, Vector momentum, class<DamageType> damageType, optional int HitIdx)
@@ -22,7 +22,7 @@ function TakeDamage(int Damage, Pawn instigatedBy, Vector hitlocation, Vector mo
 
 ## Proposed solution
 
-Since you are going to edit `KFPawn` to fix dosh exploits
+Since you are going to edit [KFPawn](https://github.com/InsultingPros/KillingFloor/blob/main/KFMod/Classes/KFPawn.uc) to fix dosh exploits
 
 ```clike
 function TakeDamage(int Damage, Pawn instigatedBy, Vector hitlocation, Vector momentum, class<DamageType> damageType, optional int HitIdx )

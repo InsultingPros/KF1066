@@ -10,7 +10,7 @@ Shooting pipes with certain weapons causes them to explode several times potenti
 
 ## Reasons
 
-`KFMod/PipeBombProjecile.uc#485 (function TakeDamage)` does not have a check if the pipe was already triggered. So, when a player shoots the pipe with a weapon which has a very fast rate of fire, it triggers pipe's `TakeDamage` method several times causing pipe to explode on every call.
+[KFMod/PipeBombProjecile.uc#485 (function TakeDamage)](https://github.com/InsultingPros/KillingFloor/blob/6412f4322d353c05604db3851bdc4ca1d2f2ba32/KFMod/Classes/PipeBombProjectile.uc#L485) does not have a check if the pipe was already triggered. So, when a player shoots the pipe with a weapon which has a very fast rate of fire, it triggers pipe's `TakeDamage` method several times causing pipe to explode on every call.
 
 ## Proposed solution
 
@@ -120,7 +120,7 @@ PipeBombProjectile KF-ThrillsChills.PipeBombProjectile (Function KFMod.PipeBombP
 
 ## Reasons
 
-`ExplodeSounds[0]` is not defined.
+[ExplodeSounds[0]](https://github.com/InsultingPros/KillingFloor/blob/6412f4322d353c05604db3851bdc4ca1d2f2ba32/KFMod/Classes/PipeBombProjectile.uc#L28) is not defined.
 
 ## Proposed solution
 

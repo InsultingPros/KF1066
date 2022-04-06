@@ -6,8 +6,9 @@ This repository contains crucial info for fixing [**Killing Floor 1**](https://s
 
 TODO:
 
-1. ~~Accelerated players (when you hug and jump on several collisions and accelerate from them) one hit kill *ANY* zed.~~
-2. ~~Projectiles vs players / zeds.~~
+1. Fix outdated youtube links.
+2. ~~Accelerated players (when you hug and jump on several collisions and accelerate from them) one hit kill *ANY* zed.~~
+3. ~~Projectiles vs players / zeds.~~
 
 ## Credits
 

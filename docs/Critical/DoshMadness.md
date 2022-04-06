@@ -10,7 +10,7 @@ No restrictions for dosh tossing over a short period of time results in the foll
 
 ### Exploits reasons
 
-`KFMod/KFPawn.uc#2964`
+[KFMod/KFPawn.uc#2964](https://github.com/InsultingPros/KillingFloor/blob/6412f4322d353c05604db3851bdc4ca1d2f2ba32/KFMod/Classes/KFPawn.uc#L2964)
 
 ```clike
 exec function TossCash( int Amount )
@@ -76,23 +76,24 @@ After testing this with friends, we came up with `0.1f`. It prevents any dosh-re
 
 Proposed fix:
 
-`KFMod/KFPawn.uc`
+[KFMod/KFPawn.uc](https://github.com/InsultingPros/KillingFloor/blob/main/KFMod/Classes/KFPawn.uc)
 
 ```clike
+// add a new variable for checks
 var float AllowedTossCashTime;
-
-...
 
 exec function TossCash(int Amount)
 {
-  ...
+    ...
 
-  if (Level.TimeSeconds < AllowedTossCashTime)
-    return;
+    // add delay check on top
+    if (Level.TimeSeconds < AllowedTossCashTime)
+      return;
 
-  ...
+    ...
 
-  AllowedTossCashTime = Level.TimeSeconds + 0.1f;
+    // refresh delay at the end
+    AllowedTossCashTime = Level.TimeSeconds + 0.1f;
 }
 ```
 
@@ -106,20 +107,21 @@ If you want this completely fixed, you should restrict players to have no more t
 - Additionally restrict tossing to 25 pickups per 8.5 seconds window.
 
 ```clike
-  var float AllowedTossCashTime, WindowEndTossCashTime;
-  var byte WindowTossCashCount;
+var float AllowedTossCashTime, WindowEndTossCashTime;
+var byte WindowTossCashCount;
 
-  ...
 
-  exec function TossCash( int Amount )
-  {
+exec function TossCash( int Amount )
+{
     ...
 
+    // check both delay and tossed amount
     if (Level.TimeSeconds < AllowedTossCashTime || (Level.TimeSeconds < WindowEndTossCashTime && WindowTossCashCount > 25))
       return;
 
     ...
 
+    // update delay / amount
     AllowedTossCashTime = Level.TimeSeconds + 0.1f;
     if (WindowEndTossCashTime < Level.TimeSeconds)
     {
@@ -128,7 +130,7 @@ If you want this completely fixed, you should restrict players to have no more t
     }
     else
       ++WindowTossCashCount;
-  }
+}
 ```
 
 - Oh, and you can probably tweak something in the engine to prevent bypass exploit from happening.
